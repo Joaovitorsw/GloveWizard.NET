@@ -1,0 +1,12 @@
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Contracts\bin\Debug\net6.0\GloveWizard.Contracts.deps.json
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Contracts\bin\Debug\net6.0\GloveWizard.Contracts.dll
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Contracts\bin\Debug\net6.0\GloveWizard.Contracts.pdb
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Contracts\obj\Debug\net6.0\GloveWizard.Contracts.csproj.AssemblyReference.cache
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Contracts\obj\Debug\net6.0\GloveWizard.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Contracts\obj\Debug\net6.0\GloveWizard.Contracts.AssemblyInfoInputs.cache
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Contracts\obj\Debug\net6.0\GloveWizard.Contracts.AssemblyInfo.cs
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Contracts\obj\Debug\net6.0\GloveWizard.Contracts.csproj.CoreCompileInputs.cache
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Contracts\obj\Debug\net6.0\GloveWizard.Contracts.dll
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Contracts\obj\Debug\net6.0\refint\GloveWizard.Contracts.dll
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Contracts\obj\Debug\net6.0\GloveWizard.Contracts.pdb
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Contracts\obj\Debug\net6.0\ref\GloveWizard.Contracts.dll

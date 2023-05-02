@@ -1,0 +1,14 @@
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Infrastructure\bin\Debug\net6.0\GloveWizard.Infrastructure.deps.json
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Infrastructure\bin\Debug\net6.0\GloveWizard.Infrastructure.dll
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Infrastructure\bin\Debug\net6.0\GloveWizard.Infrastructure.pdb
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Infrastructure\obj\Debug\net6.0\GloveWizard.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Infrastructure\obj\Debug\net6.0\GloveWizard.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Infrastructure\obj\Debug\net6.0\GloveWizard.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Infrastructure\obj\Debug\net6.0\GloveWizard.Infrastructure.AssemblyInfo.cs
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Infrastructure\obj\Debug\net6.0\GloveWizard.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Infrastructure\obj\Debug\net6.0\GloveWizard.Infrastructure.dll
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Infrastructure\obj\Debug\net6.0\refint\GloveWizard.Infrastructure.dll
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Infrastructure\obj\Debug\net6.0\GloveWizard.Infrastructure.pdb
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Infrastructure\obj\Debug\net6.0\ref\GloveWizard.Infrastructure.dll
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Infrastructure\bin\Debug\net6.0\GloveWizard.Infrastructure.runtimeconfig.json
+C:\Users\João Vitor\Documents\Programação\C#\GloveWizard\GloveWizard.Infrastructure\obj\Debug\net6.0\GloveWizard.Infrastructure.genruntimeconfig.cache
