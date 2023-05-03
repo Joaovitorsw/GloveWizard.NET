@@ -2,16 +2,16 @@
 using GloveWizard.Infrastructure.Entities;
 using System.Linq.Expressions;
 
-namespace GloveWizard.Infrastructure.Interfaces.IGenericRepository
-{ 
-  public interface  IGenericRepository<T> where T : class
+namespace GloveWizard.Infrastructure.Interfaces
+{
+    public interface IGenericRepository<T> where T : class
     {
-    T? GetById(int id);
-    IEnumerable<T> GetAll();
-    IEnumerable<T> Find(Expression<Func<T, bool>> expression);
-    Task<T> Add(T entity);
-    bool Remove(int id);
-    bool Update(T entity);
-}
+        Task<T> GetByIdAsync(int id);
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<T> FindAsync(Expression<Func<T, bool>> expression);
+        Task<T> AddAsync(T entity);
+        Task<bool> RemoveAsync(int id);
+        Task<bool> UpdateAsync(T entity);
+    }
 
 }

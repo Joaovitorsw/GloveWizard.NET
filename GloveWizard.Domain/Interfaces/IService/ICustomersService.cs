@@ -8,11 +8,12 @@ namespace GloveWizard.Domain.Interfaces.IService
 
     public interface ICustomersService
     {
-        Task<ResponseViewModel<List<Custumer>>> GetCustomers();
+        Task<ApiResponse<IList<Custumer>>> GetCustomersAsync();
 
-        Task<ResponseViewModel<Custumer>> GetByCustomerID(int id);
-        Task<ResponseViewModel<Custumer>> InsertAsync(CustumerRequest custumer);
-        ResponseViewModel<Custumer> Update(Custumer custumer);
+        Task<ApiResponse<Custumer>> GetByCustomerIdAsync(int id);
+        Task<ApiResponse<Custumer>> InsertAsync(CustumerRequest custumer);
+        Task<ApiResponse<Custumer>> UpdateAsync(Custumer custumer);
+        Task<ApiResponse<Custumer>> RemoveAsync(int id);
         Task<int> CompletedAsync();
 
     }

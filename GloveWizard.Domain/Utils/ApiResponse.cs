@@ -1,33 +1,34 @@
-﻿using Newtonsoft.Json;
+﻿using GloveWizard.Domain.Constants;
+using Newtonsoft.Json;
 using System.Net;
 
 namespace GloveWizard.Domain.Utils.ResponseViewModel
 {
-    public class ResponseViewModel<T>
+    public class ApiResponse<T>
     {
-        public string Message { get; set; } = "Voce obteve sucesso ao obter os dados!";
+        public string Message { get; set; } = ApiMessagesConstant.DefaultSucessMessage;
         public T? Data { get; set; }
 
         public HttpStatusCode StatusCode { get; set; }
 
 
 
-        public ResponseViewModel(string message, HttpStatusCode statusCode)
+        public ApiResponse(string message, HttpStatusCode statusCode)
         {
             Message = message;
             StatusCode = statusCode;
         }  
-        public ResponseViewModel( T data,string message, HttpStatusCode statusCode)
+        public ApiResponse( T data,string message, HttpStatusCode statusCode)
         {
             Data = data;
             Message = message;
             StatusCode = statusCode;
 
-        }   public ResponseViewModel(T data, HttpStatusCode statusCode)
+        }   public ApiResponse(T data, HttpStatusCode statusCode)
         {
             Data = data;
             StatusCode = statusCode;
-        }  public ResponseViewModel( HttpStatusCode statusCode)
+        }  public ApiResponse( HttpStatusCode statusCode)
         {
             StatusCode = statusCode;
         }

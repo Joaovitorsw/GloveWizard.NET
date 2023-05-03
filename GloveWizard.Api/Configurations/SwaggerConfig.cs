@@ -12,11 +12,11 @@ namespace GloveWizard.Configurations
     {
         public static void AddSwaggerConfig(this IServiceCollection services)
         {
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(SwaggerGenOptions =>
             {
-                c.OperationFilter<SwaggerDefaultValues>();
+                SwaggerGenOptions.OperationFilter<SwaggerDefaultValues>();
 
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                SwaggerGenOptions.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "Insira o token JWT desta maneira: Bearer {seu token}",
                     Name = "Authorization",
@@ -26,7 +26,7 @@ namespace GloveWizard.Configurations
                     Type = SecuritySchemeType.ApiKey
                 });
 
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                SwaggerGenOptions.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {
                         new OpenApiSecurityScheme
@@ -96,7 +96,7 @@ namespace GloveWizard.Configurations
             {
                 var description = context.ApiDescription
                     .ParameterDescriptions
-                    .First(p => p.Name == parameter.Name);
+                    .First(ApiParameterDescription => ApiParameterDescription.Name == parameter.Name);
 
                 var routeInfo = description.RouteInfo;
 

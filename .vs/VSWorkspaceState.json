@@ -2,9 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\GloveWizard.Api",
-    "\\GloveWizard.Api\\bin\\Debug",
-    "\\GloveWizard.Api\\Controllers"
+    "\\GloveWizard.Api\\Controllers",
+    "\\GloveWizard.Infrastructure"
   ],
-  "SelectedNode": "\\GloveWizard.Api\\Program.cs",
+  "SelectedNode": "\\GloveWizard.sln",
   "PreviewInSolutionExplorer": false
 }

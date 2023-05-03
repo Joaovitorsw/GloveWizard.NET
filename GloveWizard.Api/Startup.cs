@@ -4,14 +4,14 @@ namespace GloveWizard
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
 
         public IConfiguration Configuration { get; }
 
         public readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
         public void ConfigureServices(IServiceCollection services)
         {

@@ -1,6 +1,6 @@
 ﻿using GloveWizard.Data.Contexts;
 using GloveWizard.Data.Contexts.Interfaces;
-using GloveWizard.Infrastructure.Interfaces.IGenericRepository;
+using GloveWizard.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Linq.Expressions;
@@ -21,48 +21,48 @@ namespace GloveWizard.Infrastructure.Repositorys
             dbSet = _context.Set<T>();
         }
 
-        public async Task<T> Add(T entity)
+        public virtual async Task<T> AddAsync(T entity)
         {
-             await dbSet.AddAsync(entity);
+            await dbSet.AddAsync(entity);
+            await _context.SaveChangesAsync();
             return entity;
             
         }
 
-        public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
+        public virtual async Task<T> FindAsync(Expression<Func<T, bool>> expression)
         {
-            return dbSet.AsNoTracking().Where(expression);
+            return await dbSet.FirstOrDefaultAsync(expression);
+        }
+        
+        public virtual async Task<IEnumerable<T>> GetAllAsync()
+        {
+            return await dbSet.ToListAsync();
+
         }
 
-        public  IEnumerable<T> GetAll()
+        public virtual async Task<T?> GetByIdAsync(int id)
         {
-            return dbSet.ToList();
-
+            return await dbSet.FindAsync(id);
         }
 
-        public T? GetById(int id)
+        public virtual async Task<bool> RemoveAsync(int id)
         {
-            return dbSet.Find(id);
-        }
-
-        public  bool Remove(int id)
-        {
-            var entity = dbSet.Find(id);
+            var entity = await dbSet.FindAsync(id);
 
             if (entity != null)
             {
                 dbSet.Remove(entity);
+                await _context.SaveChangesAsync();
                 return true;
             }
 
             return false;
         }
 
-        public bool Update(T obj)
+        public virtual async Task<bool> UpdateAsync(T obj)
         {
-            var entry = dbSet.Entry(obj);
-            entry.CurrentValues.SetValues(obj);
-            entry.State = EntityState.Modified;
-            _context.SaveChanges();
+             dbSet.Update(obj);
+            await  _context.SaveChangesAsync();
 
             return true;
         }

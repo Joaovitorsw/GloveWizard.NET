@@ -2,11 +2,12 @@
 
 using AutoMapper;
 using GloveWizard.Data.Contexts.Interfaces;
+using GloveWizard.Domain.Constants;
 using GloveWizard.Domain.Interfaces.IService;
 using GloveWizard.Domain.Models;
 using GloveWizard.Domain.Utils.ResponseViewModel;
 using GloveWizard.Infrastructure.Entities;
-using GloveWizard.Infrastructure.Interfaces.IRepository;
+using GloveWizard.Infrastructure.Interfaces;
 using System.Net;
 
 namespace GloveWizard.Domain.Service
@@ -24,71 +25,77 @@ namespace GloveWizard.Domain.Service
             _mapper = mapper;
         }
 
-        public async Task<ResponseViewModel<List<Custumer>>> GetCustomers()
+        public async Task<ApiResponse<IList<Custumer>>> GetCustomersAsync()
         {
-            var dataBaseFind =  _unitOfWork.Custumers.GetAll();
+            IEnumerable<Customers> dataBaseFind = await _unitOfWork.Custumers.GetAllAsync();
 
-            var response = _mapper.Map<IEnumerable<Custumer>>(dataBaseFind);
+            if (dataBaseFind.Count() <= 0) return new ApiResponse<IList<Custumer>>(
+                new List<Custumer>(),
+                ApiMessagesConstant.NotFoundDataAllMessage,
+                HttpStatusCode.NotFound
+                );
 
-            if(response.Count() <= 0)
-            {
-                return new ResponseViewModel<List<Custumer>>(response.ToList(), "Não foi possivel encontrar registros ",HttpStatusCode.NotFound);
-            }
-
-            return new ResponseViewModel<List<Custumer>>(response.ToList(), HttpStatusCode.OK);
+            return new ApiResponse<IList<Custumer>>(_mapper.Map<IEnumerable<Custumer>>(dataBaseFind).ToList(), HttpStatusCode.OK);
         }
-        public async Task<ResponseViewModel<Custumer>> GetByCustomerID(int id)
+        public async Task<ApiResponse<Custumer>> GetByCustomerIdAsync(int id)
         {
-            var dataBaseFind =  _unitOfWork.Custumers.GetById(id);
+            Customers dataBaseFind = await _unitOfWork.Custumers.GetByIdAsync(id);
 
 
-            if (dataBaseFind is null) return new ResponseViewModel<Custumer>("Este registro não existe", HttpStatusCode.NotFound);
+            if (dataBaseFind is null) return new ApiResponse<Custumer>(
+                ApiMessagesConstant.NotFoundDataMessage,
+                HttpStatusCode.NotFound
+                );
+            
 
-            var response = _mapper.Map<Custumer>(dataBaseFind);
-
-            return new ResponseViewModel<Custumer>(response, HttpStatusCode.OK);
+            return new ApiResponse<Custumer>(_mapper.Map<Custumer>(dataBaseFind), HttpStatusCode.OK);
         }
 
-        public async Task<ResponseViewModel<Custumer>> InsertAsync(CustumerRequest custumer)
+        public async Task<ApiResponse<Custumer>> InsertAsync(CustumerRequest custumer)
         {
-            var entity = _mapper.Map<Customers>(custumer);
 
-           var response =  await _unitOfWork.Custumers.Add(entity);
+            Customers response = await _unitOfWork.Custumers.AddAsync(_mapper.Map<Customers>(custumer));
 
-            await _unitOfWork.CompletedAsync();
-
-            var mappedResponse = _mapper.Map<Custumer>(response);
-
-
-
-
-            return new ResponseViewModel<Custumer>(mappedResponse, "Você inseriu este registro com sucesso!", HttpStatusCode.OK);
+            return new ApiResponse<Custumer>(
+                _mapper.Map<Custumer>(response),
+                ApiMessagesConstant.InsertSucessMessage,
+                HttpStatusCode.OK
+                );
 
         }
-        public  ResponseViewModel<Custumer> Update(Custumer custumer)
+        public async Task<ApiResponse<Custumer>> UpdateAsync(Custumer custumer)
         {
-            var dataBaseFind =  _unitOfWork.Custumers.GetById(custumer.CustomerID);
+            Customers dataBaseFind = await _unitOfWork.Custumers.GetByIdAsync(custumer.CustomerID);
 
 
-            if (dataBaseFind is null) return new ResponseViewModel<Custumer>("Este registro não existe", HttpStatusCode.NotFound);
+            if (dataBaseFind is null) return new ApiResponse<Custumer>(
+                ApiMessagesConstant.NotFoundDataMessage,
+                HttpStatusCode.NotFound
+                );
 
-            var entity = _mapper.Map<Customers>(custumer);
 
-             _unitOfWork.Custumers.Update(entity);
+            await _unitOfWork.Custumers.UpdateAsync(_mapper.Map<Customers>(custumer));
 
-            return new ResponseViewModel<Custumer>(custumer,"Você atualizou este registro com sucesso!", HttpStatusCode.OK);
+            return new ApiResponse<Custumer>(
+                custumer,
+                ApiMessagesConstant.UpdateSucessMessage,
+                HttpStatusCode.OK
+                );
 
-        }     public async Task<ResponseViewModel<Custumer>> Remove(int id)
+        }
+        public async Task<ApiResponse<Custumer>> RemoveAsync(int id)
         {
-            var dataBaseFind =  _unitOfWork.Custumers.GetById(id);
+            var dataBaseFind = await _unitOfWork.Custumers.GetByIdAsync(id);
 
 
-            if (dataBaseFind is null) return new ResponseViewModel<Custumer>("Este registro não existe", HttpStatusCode.NotFound);
+            if (dataBaseFind is null) return new ApiResponse<Custumer>(
+                ApiMessagesConstant.NotFoundDataMessage,
+                HttpStatusCode.NotFound
+                );
 
-             _unitOfWork.Custumers.Remove(id);
-            await _unitOfWork.CompletedAsync();
+            await _unitOfWork.Custumers.RemoveAsync(id);
 
-            return new ResponseViewModel<Custumer>("Você excluiu este registro com sucesso!", HttpStatusCode.OK);
+            return new ApiResponse<Custumer>(ApiMessagesConstant.RemoveSucessMessage, HttpStatusCode.OK);
 
         }
 

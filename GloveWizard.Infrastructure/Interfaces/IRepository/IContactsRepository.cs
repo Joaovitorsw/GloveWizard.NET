@@ -4,7 +4,7 @@ using GloveWizard.Infrastructure.Interfaces;
 
 namespace GloveWizard.Infrastructure.Interfaces
 {
-    public interface ICustomersRepository : IGenericRepository<Customers>
+    public interface IContactsRepository : IGenericRepository<Contacts>
     {
     }
 

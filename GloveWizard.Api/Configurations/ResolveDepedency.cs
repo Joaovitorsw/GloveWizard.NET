@@ -3,11 +3,7 @@
 using GloveWizard.Data.Contexts;
 using GloveWizard.Data.Contexts.Interfaces;
 using GloveWizard.Domain.Interfaces.IService;
-using GloveWizard.Domain.Models;
 using GloveWizard.Domain.Service;
-using GloveWizard.Infrastructure.Interfaces.IRepository;
-using GloveWizard.Infrastructure.Repositorys;
-using GloveWizard.Infrastructure.Repositorys.CustomersRepository;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -20,10 +16,10 @@ namespace GloveWizard.Configurations
             //Work Interfaces
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             // Services
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient(typeof(CustomersService), typeof(CustomersService));
+            services.AddScoped<ICustomersService, CustomersService>();
 
 
             return services;
