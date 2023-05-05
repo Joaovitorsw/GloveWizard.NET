@@ -1,11 +1,11 @@
 ﻿
-using GloveWizard.Infrastructure.Repositorys;
+using GloveWizard.Infrastructure.Repositores;
 
 namespace GloveWizard.Data.Contexts.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        CustomersRepository Custumers { get; }
+        CustomersRepository Customers { get; }
         ContactsRepository Contacts { get; }
         Task<int> CompletedAsync();
     }

@@ -2,7 +2,7 @@
 namespace GloveWizard.Domain.Models
 {
 
-    public class CustumerRequest
+    public class CostumerRequest
     {
 
         public string CustomerName { get; set; }

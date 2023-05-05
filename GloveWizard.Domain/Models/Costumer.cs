@@ -1,7 +1,7 @@
 ﻿
 namespace GloveWizard.Domain.Models
 {
-    public class Custumer
+    public class Costumer
     {
 
         public int CustomerID { get; set; }

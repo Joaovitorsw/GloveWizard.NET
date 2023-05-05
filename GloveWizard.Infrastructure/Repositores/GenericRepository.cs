@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Linq.Expressions;
 
-namespace GloveWizard.Infrastructure.Repositorys
+namespace GloveWizard.Infrastructure.Repositores
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
@@ -26,14 +26,14 @@ namespace GloveWizard.Infrastructure.Repositorys
             await dbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity;
-            
+
         }
 
         public virtual async Task<T> FindAsync(Expression<Func<T, bool>> expression)
         {
             return await dbSet.FirstOrDefaultAsync(expression);
         }
-        
+
         public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
             return await dbSet.ToListAsync();
@@ -61,8 +61,8 @@ namespace GloveWizard.Infrastructure.Repositorys
 
         public virtual async Task<bool> UpdateAsync(T obj)
         {
-             dbSet.Update(obj);
-            await  _context.SaveChangesAsync();
+            dbSet.Update(obj);
+            await _context.SaveChangesAsync();
 
             return true;
         }

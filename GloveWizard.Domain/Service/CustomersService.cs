@@ -25,77 +25,77 @@ namespace GloveWizard.Domain.Service
             _mapper = mapper;
         }
 
-        public async Task<ApiResponse<IList<Custumer>>> GetCustomersAsync()
+        public async Task<ApiResponse<IList<Costumer>>> GetCustomersAsync()
         {
-            IEnumerable<Customers> dataBaseFind = await _unitOfWork.Custumers.GetAllAsync();
+            IEnumerable<Customers> dataBaseFind = await _unitOfWork.Customers.GetAllAsync();
 
-            if (dataBaseFind.Count() <= 0) return new ApiResponse<IList<Custumer>>(
-                new List<Custumer>(),
+            if (dataBaseFind.Count() <= 0) return new ApiResponse<IList<Costumer>>(
+                new List<Costumer>(),
                 ApiMessagesConstant.NotFoundDataAllMessage,
                 HttpStatusCode.NotFound
                 );
 
-            return new ApiResponse<IList<Custumer>>(_mapper.Map<IEnumerable<Custumer>>(dataBaseFind).ToList(), HttpStatusCode.OK);
+            return new ApiResponse<IList<Costumer>>(_mapper.Map<IEnumerable<Costumer>>(dataBaseFind).ToList(), HttpStatusCode.OK);
         }
-        public async Task<ApiResponse<Custumer>> GetByCustomerIdAsync(int id)
+        public async Task<ApiResponse<Costumer>> GetByCustomerIdAsync(int id)
         {
-            Customers dataBaseFind = await _unitOfWork.Custumers.GetByIdAsync(id);
+            Customers dataBaseFind = await _unitOfWork.Customers.GetByIdAsync(id);
 
 
-            if (dataBaseFind is null) return new ApiResponse<Custumer>(
+            if (dataBaseFind is null) return new ApiResponse<Costumer>(
                 ApiMessagesConstant.NotFoundDataMessage,
                 HttpStatusCode.NotFound
                 );
-            
 
-            return new ApiResponse<Custumer>(_mapper.Map<Custumer>(dataBaseFind), HttpStatusCode.OK);
+
+            return new ApiResponse<Costumer>(_mapper.Map<Costumer>(dataBaseFind), HttpStatusCode.OK);
         }
 
-        public async Task<ApiResponse<Custumer>> InsertAsync(CustumerRequest custumer)
+        public async Task<ApiResponse<Costumer>> InsertAsync(CostumerRequest costumer)
         {
 
-            Customers response = await _unitOfWork.Custumers.AddAsync(_mapper.Map<Customers>(custumer));
+            Customers response = await _unitOfWork.Customers.AddAsync(_mapper.Map<Customers>(costumer));
 
-            return new ApiResponse<Custumer>(
-                _mapper.Map<Custumer>(response),
-                ApiMessagesConstant.InsertSucessMessage,
+            return new ApiResponse<Costumer>(
+                _mapper.Map<Costumer>(response),
+                ApiMessagesConstant.InsertSuccessMessage,
                 HttpStatusCode.OK
                 );
 
         }
-        public async Task<ApiResponse<Custumer>> UpdateAsync(Custumer custumer)
+        public async Task<ApiResponse<Costumer>> UpdateAsync(Costumer customer)
         {
-            Customers dataBaseFind = await _unitOfWork.Custumers.GetByIdAsync(custumer.CustomerID);
+            Customers dataBaseFind = await _unitOfWork.Customers.GetByIdAsync(customer.CustomerID);
 
 
-            if (dataBaseFind is null) return new ApiResponse<Custumer>(
+            if (dataBaseFind is null) return new ApiResponse<Costumer>(
                 ApiMessagesConstant.NotFoundDataMessage,
                 HttpStatusCode.NotFound
                 );
 
 
-            await _unitOfWork.Custumers.UpdateAsync(_mapper.Map<Customers>(custumer));
+            await _unitOfWork.Customers.UpdateAsync(_mapper.Map<Customers>(customer));
 
-            return new ApiResponse<Custumer>(
-                custumer,
-                ApiMessagesConstant.UpdateSucessMessage,
+            return new ApiResponse<Costumer>(
+                customer,
+                ApiMessagesConstant.UpdateSuccessMessage,
                 HttpStatusCode.OK
                 );
 
         }
-        public async Task<ApiResponse<Custumer>> RemoveAsync(int id)
+        public async Task<ApiResponse<Costumer>> RemoveAsync(int id)
         {
-            var dataBaseFind = await _unitOfWork.Custumers.GetByIdAsync(id);
+            var dataBaseFind = await _unitOfWork.Customers.GetByIdAsync(id);
 
 
-            if (dataBaseFind is null) return new ApiResponse<Custumer>(
+            if (dataBaseFind is null) return new ApiResponse<Costumer>(
                 ApiMessagesConstant.NotFoundDataMessage,
                 HttpStatusCode.NotFound
                 );
 
-            await _unitOfWork.Custumers.RemoveAsync(id);
+            await _unitOfWork.Customers.RemoveAsync(id);
 
-            return new ApiResponse<Custumer>(ApiMessagesConstant.RemoveSucessMessage, HttpStatusCode.OK);
+            return new ApiResponse<Costumer>(ApiMessagesConstant.RemoveSuccessMessage, HttpStatusCode.OK);
 
         }
 

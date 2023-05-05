@@ -7,7 +7,7 @@ using GloveWizard.Infrastructure.Interfaces;
 using Microsoft.Extensions.Logging;
 using System.Linq.Expressions;
 
-namespace GloveWizard.Infrastructure.Repositorys
+namespace GloveWizard.Infrastructure.Repositores
 {
 
 

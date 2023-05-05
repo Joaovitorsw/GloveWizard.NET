@@ -7,7 +7,7 @@ using GloveWizard.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace GloveWizard.Infrastructure.Repositorys
+namespace GloveWizard.Infrastructure.Repositores
 {
     public class CustomersRepository : GenericRepository<Customers>, ICustomersRepository
     {
