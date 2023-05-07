@@ -14,12 +14,12 @@ namespace GloveWizard.Configurations
 
             services.AddAutoMapper(IMapperConfigurationExpression =>
             {
-                IMapperConfigurationExpression.CreateMap<Customers, Costumer>().ForMember(
-                    costumer => costumer.CustomerID, option => option.MapFrom(customers => customers.customer_id)
+                IMapperConfigurationExpression.CreateMap<Customers, Customer>().ForMember(
+                    customer => customer.CustomerID, option => option.MapFrom(customers => customers.customer_id)
                     ).ForMember(
-                    costumer => costumer.CustomerName, option => option.MapFrom(customers => customers.customer_name)
+                    customer => customer.CustomerName, option => option.MapFrom(customers => customers.customer_name)
                     ).ForMember(
-                    costumer => costumer.Contact, option => option.MapFrom(customers => customers.contacts)
+                    customer => customer.Contact, option => option.MapFrom(customers => customers.contacts)
                     )
                     .ReverseMap();
 
@@ -36,10 +36,10 @@ namespace GloveWizard.Configurations
                     )
                     .ReverseMap();
 
-                IMapperConfigurationExpression.CreateMap<CostumerRequest, Customers>().ForMember(
-                    customers => customers.customer_name, option => option.MapFrom(costumer => costumer.CustomerName)
+                IMapperConfigurationExpression.CreateMap<CustomerRequest, Customers>().ForMember(
+                    customers => customers.customer_name, option => option.MapFrom(customer => customer.CustomerName)
                     ).ForMember(
-                    costumer => costumer.contacts, option => option.MapFrom(customers => customers.Contact)
+                    customer => customer.contacts, option => option.MapFrom(customers => customers.Contact)
                     ).ReverseMap(); ;
 
             }, AppDomain.CurrentDomain.GetAssemblies());

@@ -9,13 +9,13 @@ namespace GloveWizard.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class CostumerController : ControllerBase
+public class CustomerController : ControllerBase
 
 {
 
     private readonly ICustomersService _customersService;
 
-    public CostumerController(ICustomersService customersService)
+    public CustomerController(ICustomersService customersService)
     {
         _customersService = customersService;
     }
@@ -23,30 +23,30 @@ public class CostumerController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        ApiResponse<IList<Costumer>> responseViewModel = await _customersService.GetCustomersAsync();
+        ApiResponse<IList<Customer>> responseViewModel = await _customersService.GetCustomersAsync();
         return StatusCode((int)responseViewModel.StatusCode, responseViewModel);
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        ApiResponse<Costumer> responseViewModel = await _customersService.GetByCustomerIdAsync(id);
+        ApiResponse<Customer> responseViewModel = await _customersService.GetByCustomerIdAsync(id);
 
         return StatusCode((int)responseViewModel.StatusCode, responseViewModel);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Add(CostumerRequest costumer)
+    public async Task<IActionResult> Add(CustomerRequest customer)
     {
-        ApiResponse<Costumer> responseViewModel = await _customersService.InsertAsync(costumer);
+        ApiResponse<Customer> responseViewModel = await _customersService.InsertAsync(customer);
 
         return StatusCode((int)responseViewModel.StatusCode, responseViewModel);
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update(Costumer costumer)
+    public async Task<IActionResult> Update(Customer customer)
     {
-        ApiResponse<Costumer> responseViewModel = await _customersService.UpdateAsync(costumer);
+        ApiResponse<Customer> responseViewModel = await _customersService.UpdateAsync(customer);
 
         return StatusCode((int)responseViewModel.StatusCode, responseViewModel);
     }
@@ -54,7 +54,7 @@ public class CostumerController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        ApiResponse<Costumer> responseViewModel = await _customersService.RemoveAsync(id);
+        ApiResponse<Customer> responseViewModel = await _customersService.RemoveAsync(id);
 
         return StatusCode((int)responseViewModel.StatusCode, responseViewModel);
     }
