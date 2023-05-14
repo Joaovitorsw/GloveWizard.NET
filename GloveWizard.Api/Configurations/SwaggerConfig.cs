@@ -49,8 +49,10 @@ namespace GloveWizard.Configurations
             app.UseSwaggerUI(
                 options =>
                 {
-                        options.EnableFilter();
-                        options.DocumentTitle = "Glove Wizard API";
+                    options.RoutePrefix = String.Empty;
+                    options.SwaggerEndpoint("../swagger/v1/swagger.json", "My API V1");
+                    options.EnableFilter();
+                    options.DocumentTitle = "Glove Wizard API";
                 });
         }
     }
@@ -66,7 +68,7 @@ namespace GloveWizard.Configurations
 
         public void Configure(SwaggerGenOptions options)
         {
-                options.SwaggerDoc("v1", CreateInfoForApiVersion());
+            options.SwaggerDoc("v1", CreateInfoForApiVersion());
         }
 
         private OpenApiInfo CreateInfoForApiVersion()
