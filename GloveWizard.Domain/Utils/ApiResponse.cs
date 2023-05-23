@@ -10,29 +10,28 @@ namespace GloveWizard.Domain.Utils.ResponseViewModel
 
         public HttpStatusCode StatusCode { get; set; }
 
-
-
         public ApiResponse(string message, HttpStatusCode statusCode)
         {
             Message = message;
             StatusCode = statusCode;
         }
+
         public ApiResponse(T data, string message, HttpStatusCode statusCode)
         {
             Data = data;
             Message = message;
             StatusCode = statusCode;
-
         }
+
         public ApiResponse(T data, HttpStatusCode statusCode)
         {
             Data = data;
             StatusCode = statusCode;
         }
+
         public ApiResponse(HttpStatusCode statusCode)
         {
             StatusCode = statusCode;
         }
-
     }
 }

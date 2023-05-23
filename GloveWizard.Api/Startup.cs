@@ -1,13 +1,14 @@
+using GloveWizard.Api.Configurations;
 using GloveWizard.Configurations;
 
 namespace GloveWizard
 {
     public class Startup
     {
-
         public IConfiguration Configuration { get; }
 
         public readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -21,6 +22,7 @@ namespace GloveWizard
             services.AddSwaggerConfig();
             services.AddWebApiConfiguration(MyAllowSpecificOrigins);
             services.AddMvc();
+            services.AddJwtConfig(Configuration);
         }
 
         public void Configure(IApplicationBuilder app)
@@ -33,9 +35,3 @@ namespace GloveWizard
         }
     }
 }
-
-
-
-
-
-

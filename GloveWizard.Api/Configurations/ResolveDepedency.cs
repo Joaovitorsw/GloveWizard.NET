@@ -1,7 +1,6 @@
-﻿
-
-using GloveWizard.Data.Contexts;
+﻿using GloveWizard.Data.Contexts;
 using GloveWizard.Data.Contexts.Interfaces;
+using GloveWizard.Domain.Helpers;
 using GloveWizard.Domain.Interfaces.IService;
 using GloveWizard.Domain.Service;
 using Microsoft.Extensions.Options;
@@ -17,10 +16,11 @@ namespace GloveWizard.Configurations
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IErrorLogger, ErrorLogger>();
 
             // Services
             services.AddScoped<ICustomersService, CustomersService>();
-
+            services.AddScoped<IAuthService, AuthService>();
 
             return services;
         }

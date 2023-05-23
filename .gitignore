@@ -157,3 +157,7 @@ $RECYCLE.BIN/
 .vs
 bin/
 *.obj
+*/**/bin/Debug
+*/**/bin/Release
+*/**/obj/Debug
+*/**/obj/Release

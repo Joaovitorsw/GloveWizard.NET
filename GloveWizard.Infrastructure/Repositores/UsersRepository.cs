@@ -5,9 +5,9 @@ using Microsoft.Extensions.Logging;
 
 namespace GloveWizard.Infrastructure.Repositores
 {
-    public class ContactsRepository : GenericRepository<Contacts>, IContactsRepository
+    public class UsersRepository : GenericRepository<Users>, IUsersRepository
     {
-        public ContactsRepository(DataContext context, ILogger logger)
+        public UsersRepository(DataContext context, ILogger logger)
             : base(context, logger) { }
     }
 }

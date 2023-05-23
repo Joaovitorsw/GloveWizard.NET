@@ -10,15 +10,15 @@ namespace GloveWizard.Data.Contexts
         private readonly ILogger _logger;
         public CustomersRepository Customers { get; private set; }
         public ContactsRepository Contacts { get; private set; }
-        public UnitOfWork(
-        DataContext context,
-        ILoggerFactory logger
-        )
+        public UsersRepository Users { get; private set; }
+
+        public UnitOfWork(DataContext context, ILoggerFactory logger)
         {
             _context = context;
             _logger = logger.CreateLogger("logs");
             Customers = new CustomersRepository(_context, _logger);
             Contacts = new ContactsRepository(_context, _logger);
+            Users = new UsersRepository(_context, _logger);
         }
 
         public async Task<int> CompletedAsync()
@@ -31,5 +31,4 @@ namespace GloveWizard.Data.Contexts
             _context.Dispose();
         }
     }
-
 }

@@ -1,10 +1,10 @@
-﻿
-using GloveWizard.Infrastructure.Entities;
+﻿using GloveWizard.Infrastructure.Entities;
 using System.Linq.Expressions;
 
 namespace GloveWizard.Infrastructure.Interfaces
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<T>
+        where T : class
     {
         Task<T> GetByIdAsync(int id);
         Task<IEnumerable<T>> GetAllAsync();
@@ -13,5 +13,4 @@ namespace GloveWizard.Infrastructure.Interfaces
         Task<bool> RemoveAsync(int id);
         Task<bool> UpdateAsync(T entity);
     }
-
 }

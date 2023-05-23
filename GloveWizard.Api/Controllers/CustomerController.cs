@@ -1,21 +1,23 @@
-
-
+using GloveWizard.Domain.Controllers;
+using GloveWizard.Domain.Helpers;
 using GloveWizard.Domain.Interfaces.IService;
 using GloveWizard.Domain.Models;
 using GloveWizard.Domain.Utils.ResponseViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace GloveWizard.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class CustomerController : ControllerBase
-
+[Authorize]
+public class CustomerController : BaseController
 {
-
     private readonly ICustomersService _customersService;
 
-    public CustomerController(ICustomersService customersService)
+    public CustomerController(ICustomersService customersService, IErrorLogger errorLogger)
+        : base(errorLogger)
     {
         _customersService = customersService;
     }
@@ -23,8 +25,10 @@ public class CustomerController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        ApiResponse<IList<Customer>> responseViewModel = await _customersService.GetCustomersAsync();
-        return StatusCode((int)responseViewModel.StatusCode, responseViewModel);
+        ApiResponse<IList<Customer>> responseViewModel =
+            await _customersService.GetCustomersAsync();
+
+        return Response(responseViewModel);
     }
 
     [HttpGet("{id}")]
@@ -32,7 +36,7 @@ public class CustomerController : ControllerBase
     {
         ApiResponse<Customer> responseViewModel = await _customersService.GetByCustomerIdAsync(id);
 
-        return StatusCode((int)responseViewModel.StatusCode, responseViewModel);
+        return Response(responseViewModel);
     }
 
     [HttpPost]
@@ -40,7 +44,7 @@ public class CustomerController : ControllerBase
     {
         ApiResponse<Customer> responseViewModel = await _customersService.InsertAsync(customer);
 
-        return StatusCode((int)responseViewModel.StatusCode, responseViewModel);
+        return Response(responseViewModel);
     }
 
     [HttpPut]
@@ -48,7 +52,7 @@ public class CustomerController : ControllerBase
     {
         ApiResponse<Customer> responseViewModel = await _customersService.UpdateAsync(customer);
 
-        return StatusCode((int)responseViewModel.StatusCode, responseViewModel);
+        return Response(responseViewModel);
     }
 
     [HttpDelete("{id}")]
@@ -56,8 +60,6 @@ public class CustomerController : ControllerBase
     {
         ApiResponse<Customer> responseViewModel = await _customersService.RemoveAsync(id);
 
-        return StatusCode((int)responseViewModel.StatusCode, responseViewModel);
+        return Response(responseViewModel);
     }
-
-
 }

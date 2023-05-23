@@ -7,6 +7,7 @@ namespace GloveWizard.Data.Contexts.Interfaces
     {
         CustomersRepository Customers { get; }
         ContactsRepository Contacts { get; }
+        UsersRepository Users { get; }
         Task<int> CompletedAsync();
     }
 }

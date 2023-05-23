@@ -1,5 +1,4 @@
 ﻿using GloveWizard.Data.Contexts;
-using GloveWizard.Data.Contexts.Interfaces;
 using GloveWizard.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -7,14 +6,14 @@ using System.Linq.Expressions;
 
 namespace GloveWizard.Infrastructure.Repositores
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T>
+        where T : class
     {
         protected DataContext _context;
         protected DbSet<T> dbSet;
         protected readonly ILogger _logger;
-        public GenericRepository(
-            DataContext context,
-            ILogger logger)
+
+        public GenericRepository(DataContext context, ILogger logger)
         {
             _context = context;
             _logger = logger;
@@ -26,7 +25,6 @@ namespace GloveWizard.Infrastructure.Repositores
             await dbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity;
-
         }
 
         public virtual async Task<T> FindAsync(Expression<Func<T, bool>> expression)
@@ -37,7 +35,6 @@ namespace GloveWizard.Infrastructure.Repositores
         public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
             return await dbSet.ToListAsync();
-
         }
 
         public virtual async Task<T> GetByIdAsync(int id)
@@ -67,8 +64,4 @@ namespace GloveWizard.Infrastructure.Repositores
             return true;
         }
     }
-
-
 }
-
-
