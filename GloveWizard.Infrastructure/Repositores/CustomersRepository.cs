@@ -13,14 +13,14 @@ namespace GloveWizard.Infrastructure.Repositores
 
         public override async Task<IEnumerable<Customers>> GetAllAsync()
         {
-            return await _context.Customers.Include(Customers => Customers.contacts).ToListAsync();
+            return await _context.Customers.Include(Customers => Customers.Contacts).ToListAsync();
         }
 
         public override async Task<Customers> GetByIdAsync(int id)
         {
             return await _context.Customers
-                .Include(Customers => Customers.contacts)
-                .Where(x => x.customer_id == id)
+                .Include(Customers => Customers.Contacts)
+                .Where(x => x.CustomerID == id)
                 .FirstOrDefaultAsync();
         }
     }

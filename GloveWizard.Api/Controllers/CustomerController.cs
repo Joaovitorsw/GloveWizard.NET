@@ -22,15 +22,25 @@ public class CustomerController : BaseController
         _customersService = customersService;
     }
 
+    /// <summary>
+    /// Lista os clientes e os contatos vinculados.
+    /// </summary>
+    /// <response code="200">Retorna todos clientes e os contatos vinculados cadastrados</response>
+    /// <response code="401">Não autorizado</response>
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] PaginationFilter filter)
     {
-        ApiResponse<IList<Customer>> responseViewModel =
-            await _customersService.GetCustomersAsync();
+        ApiResponse<PaginationResponse<IEnumerable<Customer>>> responseViewModel =
+            await _customersService.GetCustomersAsync(filter);
 
         return Response(responseViewModel);
     }
 
+    /// <summary>
+    /// Busca um cliente pelo id os contatos vinculados.
+    /// </summary>
+    /// <response code="200">Um cliente e os contatos vinculados</response>
+    /// <response code="401">Não autorizado</response>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -39,6 +49,11 @@ public class CustomerController : BaseController
         return Response(responseViewModel);
     }
 
+    /// <summary>
+    /// Cadastra um cliente pelo id os contatos vinculados.
+    /// </summary>
+    /// <response code="200">Inseree um cliente e os contatos vinculados</response>
+    /// <response code="401">Não autorizado</response>
     [HttpPost]
     public async Task<IActionResult> Add(CustomerRequest customer)
     {
@@ -47,6 +62,11 @@ public class CustomerController : BaseController
         return Response(responseViewModel);
     }
 
+    /// <summary>
+    /// Atualiza um cliente pelo id os contatos vinculados.
+    /// </summary>
+    /// <response code="200">Atualiza o cliente e os contatos vinculados</response>
+    /// <response code="401">Não autorizado</response>
     [HttpPut]
     public async Task<IActionResult> Update(Customer customer)
     {
@@ -55,6 +75,11 @@ public class CustomerController : BaseController
         return Response(responseViewModel);
     }
 
+    /// <summary>
+    /// Remove um cliente pelo id os contatos vinculados.
+    /// </summary>
+    /// <response code="200">Remove o cliente e os contatos vinculados</response>
+    /// <response code="401">Não autorizado</response>
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {

@@ -43,6 +43,8 @@ namespace GloveWizard.Configurations
             string cors
         )
         {
+
+
             app.UseHsts();
             app.UseHttpsRedirection();
             app.UseCors(cors);

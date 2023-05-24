@@ -1,11 +1,12 @@
-﻿using GloveWizard.Domain.Models;
+﻿using GloveWizard.Domain.Helpers;
+using GloveWizard.Domain.Models;
 using GloveWizard.Domain.Utils.ResponseViewModel;
 
 namespace GloveWizard.Domain.Interfaces.IService
 {
     public interface ICustomersService
     {
-        Task<ApiResponse<IList<Customer>>> GetCustomersAsync();
+        Task<ApiResponse<PaginationResponse<IEnumerable<Customer>>>> GetCustomersAsync(PaginationFilter filter);
 
         Task<ApiResponse<Customer?>> GetByCustomerIdAsync(int id);
         Task<ApiResponse<Customer>> InsertAsync(CustomerRequest customer);

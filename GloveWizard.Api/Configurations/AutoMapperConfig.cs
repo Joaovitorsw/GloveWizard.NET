@@ -15,53 +15,53 @@ namespace GloveWizard.Configurations
                         .CreateMap<Customers, Customer>()
                         .ForMember(
                             customer => customer.CustomerID,
-                            option => option.MapFrom(customers => customers.customer_id)
+                            option => option.MapFrom(customers => customers.CustomerID)
                         )
                         .ForMember(
                             customer => customer.CustomerName,
-                            option => option.MapFrom(customers => customers.customer_name)
+                            option => option.MapFrom(customers => customers.CustomerName)
                         )
                         .ForMember(
-                            customer => customer.Contact,
-                            option => option.MapFrom(customers => customers.contacts)
+                            customer => customer.Contacts,
+                            option => option.MapFrom(customers => customers.Contacts)
                         )
-                        .ReverseMap();
+                        .ReverseMap().PreserveReferences();
 
                     IMapperConfigurationExpression
                         .CreateMap<Contacts, Contact>()
                         .ForMember(
                             contact => contact.CustomerID,
-                            option => option.MapFrom(contacts => contacts.customer_id)
+                            option => option.MapFrom(contacts => contacts.CustomerID)
                         )
                         .ForMember(
                             contact => contact.Email,
-                            option => option.MapFrom(contacts => contacts.email)
+                            option => option.MapFrom(contacts => contacts.Email)
                         )
                         .ForMember(
                             contact => contact.Phone,
-                            option => option.MapFrom(contacts => contacts.phone)
+                            option => option.MapFrom(contacts => contacts.Phone)
                         )
                         .ForMember(
                             contact => contact.ContactName,
-                            option => option.MapFrom(contacts => contacts.contact_name)
+                            option => option.MapFrom(contacts => contacts.ContactName)
                         )
                         .ForMember(
                             contact => contact.ContactID,
-                            option => option.MapFrom(contacts => contacts.contact_id)
+                            option => option.MapFrom(contacts => contacts.ContactID)
                         )
-                        .ReverseMap();
+                        .ReverseMap().PreserveReferences();
 
                     IMapperConfigurationExpression
                         .CreateMap<CustomerRequest, Customers>()
                         .ForMember(
-                            customers => customers.customer_name,
+                            customers => customers.CustomerName,
                             option => option.MapFrom(customer => customer.CustomerName)
                         )
                         .ForMember(
-                            customer => customer.contacts,
-                            option => option.MapFrom(customers => customers.Contact)
+                            customer => customer.Contacts,
+                            option => option.MapFrom(customers => customers.Contacts)
                         )
-                        .ReverseMap();
+                        .ReverseMap().PreserveReferences();
                     ;
                 },
                 AppDomain.CurrentDomain.GetAssemblies()

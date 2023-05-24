@@ -1,6 +1,7 @@
 ﻿using GloveWizard.Data.Contexts.Interfaces;
 using GloveWizard.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace GloveWizard.Data.Contexts
 {
@@ -13,10 +14,27 @@ namespace GloveWizard.Data.Contexts
         {
             modelBuilder
                 .Entity<Customers>()
-                .HasMany(Customers => Customers.contacts)
-                .WithOne(Contacts => Contacts.customers)
-                .HasForeignKey(Contacts => Contacts.customer_id)
+                .HasMany(Customers => Customers.Contacts)
+                .WithOne(Contacts => Contacts.Customers)
+                .HasForeignKey(Contacts => Contacts.CustomerID)
                 .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder
+                .Entity<Users>()
+                .Property(user => user.Roles)
+                .HasConversion(
+                    from => string.Join(";", from),
+
+                    to =>
+                        string.IsNullOrEmpty(to)
+                            ? new List<string>()
+                            : to.Split(';', StringSplitOptions.RemoveEmptyEntries).ToList(),
+
+                    new ValueComparer<List<string>>(
+                        (c1, c2) => c1.SequenceEqual(c2),
+                        c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
+                        c => c.ToList()
+                    )
+                );
         }
 
         public virtual DbSet<Customers> Customers { get; set; }

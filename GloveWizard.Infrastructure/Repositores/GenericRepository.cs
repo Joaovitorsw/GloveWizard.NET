@@ -1,6 +1,7 @@
 ﻿using GloveWizard.Data.Contexts;
 using GloveWizard.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.Logging;
 using System.Linq.Expressions;
 
@@ -35,6 +36,11 @@ namespace GloveWizard.Infrastructure.Repositores
         public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
             return await dbSet.ToListAsync();
+        }
+
+        public virtual IQueryable<T> GetIQueryable()
+        {
+            return dbSet;
         }
 
         public virtual async Task<T> GetByIdAsync(int id)

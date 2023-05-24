@@ -7,7 +7,7 @@ namespace GloveWizard.Domain.Models
         public int CustomerID { get; set; }
         public string CustomerName { get; set; }
 
-        public ICollection<Contact> Contact { get; set; } = new List<Contact>();
+        public ICollection<Contact> Contacts { get; set; } = new List<Contact>();
 
     }
 }

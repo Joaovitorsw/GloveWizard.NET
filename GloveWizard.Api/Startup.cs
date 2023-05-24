@@ -1,36 +1,48 @@
 using GloveWizard.Api.Configurations;
 using GloveWizard.Configurations;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace GloveWizard
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        public IConfiguration _configuration { get; }
+
+        private readonly IWebHostEnvironment _iWebHostEnvironment;
+
 
         public readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment iWebHostEnvironment)
         {
-            Configuration = configuration;
+            _configuration = configuration;
+            _iWebHostEnvironment = iWebHostEnvironment;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.CreateMapper();
             services.ResolveDependencies();
-            services.AddDatabaseContext(Configuration);
+            services.AddDatabaseContext(_configuration);
             services.AddSwaggerConfig();
             services.AddWebApiConfiguration(MyAllowSpecificOrigins);
             services.AddMvc();
-            services.AddJwtConfig(Configuration);
+            services.AddJwtConfig(_configuration);
         }
 
         public void Configure(IApplicationBuilder app)
         {
             app.UseApiMiddleware(MyAllowSpecificOrigins);
-            app.UseDeveloperExceptionPage();
-            app.UseStaticFiles();
+
+            if (_iWebHostEnvironment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+
             app.UseHsts();
+            app.UseStaticFiles();
             app.UseSwaggerConfig();
         }
     }

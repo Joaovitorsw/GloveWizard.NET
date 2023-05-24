@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Reflection;
 
 namespace GloveWizard.Configurations
 {
@@ -28,6 +29,11 @@ namespace GloveWizard.Configurations
                         Id = "Bearer"
                     },
                 };
+
+                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+
+                SwaggerGenOptions.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+
 
                 SwaggerGenOptions.AddSecurityDefinition("Bearer", openApiSecurityScheme);
 

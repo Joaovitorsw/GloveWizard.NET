@@ -5,6 +5,8 @@ using System.Net;
 
 namespace GloveWizard.Domain.Controllers;
 
+
+
 [ApiController]
 [Route("[controller]")]
 public class BaseController : ControllerBase

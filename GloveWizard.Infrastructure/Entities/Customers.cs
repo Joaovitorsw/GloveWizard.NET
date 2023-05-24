@@ -7,9 +7,9 @@ namespace GloveWizard.Infrastructure.Entities
     public class Customers
     {
         [Key]
-        public int customer_id { get; set; }
-        public string customer_name { get; set; }
+        public int CustomerID { get; set; }
+        public string CustomerName { get; set; }
 
-        public ICollection<Contacts> contacts { get; set; }
+        public ICollection<Contacts> Contacts { get; set; }
     }
 }

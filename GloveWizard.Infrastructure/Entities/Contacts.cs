@@ -6,14 +6,14 @@ namespace GloveWizard.Infrastructure.Entities
     public class Contacts
     {
         [Key]
-        public int contact_id { get; set; }
+        public int ContactID { get; set; }
 
-        [ForeignKey("customer_id")]
-        public int customer_id { get; set; }
-        public string contact_name { get; set; }
-        public string phone { get; set; }
-        public string email { get; set; }
+        [ForeignKey("CustomerID")]
+        public int CustomerID { get; set; }
+        public string ContactName { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
 
-        public Customers customers { get; set; }
+        public Customers Customers { get; set; }
     }
 }

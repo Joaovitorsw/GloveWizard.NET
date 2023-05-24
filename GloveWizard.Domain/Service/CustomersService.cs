@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using GloveWizard.Data.Contexts.Interfaces;
 using GloveWizard.Domain.Constants;
 using GloveWizard.Domain.Helpers;
@@ -6,6 +7,8 @@ using GloveWizard.Domain.Interfaces.IService;
 using GloveWizard.Domain.Models;
 using GloveWizard.Domain.Utils.ResponseViewModel;
 using GloveWizard.Infrastructure.Entities;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Net;
 
 namespace GloveWizard.Domain.Service
@@ -23,21 +26,33 @@ namespace GloveWizard.Domain.Service
             _errorLogger = errorLogger;
         }
 
-        public async Task<ApiResponse<IList<Customer>>> GetCustomersAsync()
+        public async Task<
+            ApiResponse<PaginationResponse<IEnumerable<Customer>>>
+        > GetCustomersAsync(PaginationFilter filter)
         {
             try
             {
-                IEnumerable<Customers> dataBaseFind = await _unitOfWork.Customers.GetAllAsync();
+                IQueryable<Customer> dataBaseFind = _unitOfWork.Customers
+                    .GetIQueryable()
+                    .Include(Customers => Customers.Contacts)
+                    .OrderBy(x => x.CustomerID)
+                    .ProjectTo<Customer>(_mapper.ConfigurationProvider);
 
                 if (dataBaseFind.Count() <= 0)
-                    return new ApiResponse<IList<Customer>>(
-                        new List<Customer>(),
+                    return new ApiResponse<PaginationResponse<IEnumerable<Customer>>>(
                         ApiMessagesConstant.NotFoundDataAllMessage,
                         HttpStatusCode.NotFound
                     );
 
-                return new ApiResponse<IList<Customer>>(
-                    _mapper.Map<IEnumerable<Customer>>(dataBaseFind).ToList(),
+                PaginationResponse<IEnumerable<Customer>> response =
+                    await PagedList<Customer>.CreateAsync(
+                        dataBaseFind,
+                        filter.CurrentPage,
+                        filter.PageSize
+                    );
+
+                return new ApiResponse<PaginationResponse<IEnumerable<Customer>>>(
+                    response,
                     HttpStatusCode.OK
                 );
             }
